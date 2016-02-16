@@ -5,6 +5,7 @@ response.meta.keywords = settings.keywords
 response.meta.description = settings.description
 response.menu = [
 (T('Índice'),URL('default','index')==URL(),URL('default','index'),[]),
+(T('Notificaciones'),URL('default','notifications')==URL(),URL('default','notifications'),[]),
 (T('Solicitudes'),URL('default','requests')==URL(),URL('default','requests'),[]),
 (T('Catálogo'),URL('default','catalogue')==URL(),URL('default','catalogue'),[]),
 (T('Inventario'),URL('default','inventory')==URL(),URL('default','inventory'),[]),
