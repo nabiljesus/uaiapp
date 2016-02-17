@@ -94,3 +94,74 @@ auth.settings.reset_password_requires_verification = True
 mail.settings.server = settings.email_server
 mail.settings.sender = settings.email_sender
 mail.settings.login = settings.email_login
+
+db.define_table('empleado',
+   Field('nombre'),
+   Field('apellido'),
+   Field('identificador'),
+   Field('cargo'),
+   Field('tlf'),
+   primarykey=['identificador'])
+
+db.define_table('inventario',
+   Field('material'),
+   Field('cantidad','float'))
+
+db.define_table('edificio',
+   Field('nombre'),
+   Field('nomenclatura'))
+
+db.define_table('lugar',
+   Field('edificio',db.edificio),
+   Field('espacio'),
+   Field('referencia'),
+   Field('extension_tlf', 'integer'))
+
+db.define_table('area',
+   Field('nombre'),
+   Field('nomenclatura'))
+
+db.define_table('supervisor',
+   Field('area', db.area),
+   Field('nombre'),
+   Field('apellido'),
+   Field('identificador'),
+   primarykey=['identificador'])
+
+db.define_table('unidad',
+   Field('nombre', unique='true'))
+
+db.define_table('estatus_solicitud',
+   Field('nombre_estatus',unique='true'))
+
+db.define_table('prioridad',
+   Field('nombre_prioridad',unique='true'))
+
+db.define_table('espacio',
+   Field('nombre_espacio',unique='true'))
+
+db.supervisor.area.requires = IS_IN_DB(db, db.area.nombre)
+db.lugar.edificio.requires = IS_IN_DB(db, db.edificio.nombre)
+db.supervisor.area.requires = IS_IN_DB(db, db.area.id, '%(nombre)s')
+db.lugar.edificio.requires = IS_IN_DB(db, db.edificio.id, '%(nombre)s')
+db.espacio.nombre_espacio.requires = IS_NOT_EMPTY()
+db.empleado.nombre.requires = IS_NOT_EMPTY()
+db.empleado.apellido.requires = IS_NOT_EMPTY()
+db.empleado.identificador.requires = IS_NOT_EMPTY()
+db.inventario.material.requires = IS_NOT_EMPTY()
+db.inventario.cantidad.requires = IS_NOT_EMPTY()
+db.edificio.nombre.requires = IS_NOT_EMPTY()
+db.edificio.nomenclatura.requires = IS_NOT_EMPTY()
+db.area.nombre.requires = IS_NOT_EMPTY()
+db.area.nomenclatura.requires = IS_NOT_EMPTY()
+db.supervisor.nombre.requires = IS_NOT_EMPTY()
+db.supervisor.apellido.requires = IS_NOT_EMPTY()
+db.supervisor.identificador.requires = IS_NOT_EMPTY()
+db.supervisor.area.requires = IS_NOT_EMPTY()
+db.unidad.nombre.requires = IS_NOT_EMPTY()
+db.prioridad.nombre_prioridad.requires = IS_NOT_EMPTY()
+db.estatus_solicitud.nombre_estatus.requires = IS_NOT_EMPTY()
+db.area.nombre.requires = IS_NOT_IN_DB(db, db.area.nombre)
+db.edificio.nombre.requires = IS_NOT_IN_DB(db, db.edificio.nombre)
+db.unidad.nombre.requires = IS_NOT_IN_DB(db, db.unidad.nombre)
+
