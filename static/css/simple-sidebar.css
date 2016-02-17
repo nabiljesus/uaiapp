@@ -185,6 +185,16 @@
     overflow: auto;
 }
 
+.roundedwhitecatalogo {
+189	    -webkit-border-radius: 10px;
+190	    -moz-border-radius: 10px;
+191	    border-radius: 10px;
+192	    background-color:#FFF;
+193	    border:4px solid #ededed;
+194	    padding: 10px;
+195	    height: 80vh;
+196	    overflow: auto;
+197	}
 
 .righttext {
     text-align: right;
