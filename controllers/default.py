@@ -78,6 +78,23 @@ def eliminar():
 @auth.requires_login()
 def inventory():
     return dict()
+
+
+def show_send_email():
+    form=SQLFORM.factory(db.emails)
+
+    if form.accepts(request):
+        response.flash = 'Correo enviado !'
+
+        # Send Email
+
+        mail.send('admin@xxx.com',
+        request.vars.correo,
+        request.vars.asunto,
+        request.vars.mensaje)
+
+    return dict(form=form)
+    
 @auth.requires_login()
 def sb():
     return dict()

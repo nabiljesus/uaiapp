@@ -53,6 +53,7 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+<<<<<<< HEAD
 timestamp: 2016-02-18T01:58:50.894665
 CREATE TABLE empleado(
     nombre CHAR(512),
@@ -124,3 +125,5 @@ CREATE TABLE espacio(
     nombre_espacio CHAR(512) UNIQUE
 );
 success!
+=======
+>>>>>>> b2e0f85527bf382cc414084221c7cbba8f2db707
