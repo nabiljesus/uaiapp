@@ -165,3 +165,10 @@ db.area.nombre.requires = IS_NOT_IN_DB(db, db.area.nombre)
 db.edificio.nombre.requires = IS_NOT_IN_DB(db, db.edificio.nombre)
 db.unidad.nombre.requires = IS_NOT_IN_DB(db, db.unidad.nombre)
 
+# Tabla base de datos para notificación a través de correo electrónico
+
+db.define_table('emails',
+    Field('correo',requires=IS_NOT_EMPTY()),
+    Field('asunto',requires=IS_NOT_EMPTY()),
+    Field('mensaje','text',requires=IS_NOT_EMPTY())
+    )
