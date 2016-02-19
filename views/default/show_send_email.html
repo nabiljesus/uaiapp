@@ -1,7 +1,9 @@
 {{left_sidebar_enabled,right_sidebar_enabled=False,False}}
 {{extend 'layout.html'}}
 
-<h3>Enviar correo electrónico</h3>
-<div class="col-lg-8 col-md-offset-2">
-{{=form}}
-</div>
+{{block content}}
+    <h3>Enviar correo electrónico</h3>
+    <div class="col-lg-8 col-md-offset-2">
+    {{=form}}
+    </div>
+{{end}}

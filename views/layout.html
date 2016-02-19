@@ -27,6 +27,7 @@
     <!-- Custom CSS -->
     <link href="{{=URL('static','css/simple-sidebar.css')}}" rel="stylesheet">
     <link href="{{=URL('static','css/requestTable.css')}}" rel="stylesheet">
+    <link href="{{=URL('static','css/tabsMenu.css')}}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -56,6 +57,10 @@
           {{pass}}
         </div>
         <div id="page-content-wrapper">
+        <!-- Page Content -->
+            <ul class="nav navbar-nav navbar-right">
+                {{='auth' in globals() and auth.navbar('Welcome',mode='dropdown') or ''}}
+            </ul>
             {{block content}}
             {{end content}}
         </div>

@@ -61,10 +61,10 @@ plugins = PluginManager()
 auth.define_tables(username=False, signature=False)
 
 ## configure email
-mail = auth.settings.mailer
-mail.settings.server = 'logging' if request.is_local else myconf.take('smtp.server')
-mail.settings.sender = myconf.take('smtp.sender')
-mail.settings.login = myconf.take('smtp.login')
+#mail = auth.settings.mailer
+#mail.settings.server = 'logging' if request.is_local else myconf.take('smtp.server')
+#mail.settings.sender = myconf.take('smtp.sender')
+#mail.settings.login = myconf.take('smtp.login')
 
 ## configure auth policy
 auth.settings.registration_requires_verification = False
@@ -91,9 +91,9 @@ auth.settings.reset_password_requires_verification = True
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
 
-mail.settings.server = settings.email_server
-mail.settings.sender = settings.email_sender
-mail.settings.login = settings.email_login
+#mail.settings.server = settings.email_server
+#mail.settings.sender = settings.email_sender
+#mail.settings.login = settings.email_login
 
 db.define_table('empleado',
    Field('nombre'),
@@ -164,11 +164,3 @@ db.estatus_solicitud.nombre_estatus.requires = IS_NOT_EMPTY()
 db.area.nombre.requires = IS_NOT_IN_DB(db, db.area.nombre)
 db.edificio.nombre.requires = IS_NOT_IN_DB(db, db.edificio.nombre)
 db.unidad.nombre.requires = IS_NOT_IN_DB(db, db.unidad.nombre)
-
-# Tabla base de datos para notificación a través de correo electrónico
-
-db.define_table('emails',
-    Field('correo',requires=IS_NOT_EMPTY()),
-    Field('asunto',requires=IS_NOT_EMPTY()),
-    Field('mensaje','text',requires=IS_NOT_EMPTY())
-    )

@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 ### required - do no delete
+from gluon.tools import Mail
+mail = Mail()
+mail.settings.server = 'smtp.gmail.com:587'
+mail.settings.sender = 'cybertechsolts@gmail.com'
+mail.settings.login = 'cybertechsolts@gmail.com:perreoperreo'
+
 def user(): return dict(form=auth())
 def download(): return response.download(request,db)
 def call(): return service()
 ### end requires
+
 def index():
     return dict()
 
@@ -79,21 +86,50 @@ def eliminar():
 def inventory():
     return dict()
 
+@auth.requires_login()
+def notifications():
+    return dict()
+
 def show_send_email():
-    form=SQLFORM.factory(db.emails)
 
-    if form.accepts(request):
-        response.flash = 'Correo enviado !'
+    form = SQLFORM.factory(
+        Field('Correo', requires =[ IS_NOT_EMPTY(error_message='Campo Requerido'), IS_EMAIL(error_message='Correo inválido') ]),
+        Field('Asunto', requires=IS_NOT_EMPTY(error_message='Campo Requerido')),
+        Field('Mensaje', requires=IS_NOT_EMPTY(error_message='Campo Requerido'), type='text'),submit_button='Enviar'
+    )
 
-        # Send Email
+    strings = form.elements(_class='string')
+    form.add_button('Regresar', URL('default','notifications'))
 
-        mail.send('admin@xxx.com',
-        request.vars.correo,
-        request.vars.asunto,
-        request.vars.mensaje)
+    btn = form.elements(_class='btn btn-primary')
+    for b in btn:
+        b['_class'] = 'btn form_submit'
+
+    btnc = form.elements(_class='w2p-form-button')
+    for b in btnc:
+        b['_class'] = 'btn form_cancel'
+
+    if form.process().accepted:
+        session.name = form.vars.name
+        session.email = form.vars.Correo
+        session.subject = form.vars.Asunto
+        session.message = form.vars.Mensaje
+        if mail:
+            if mail.send(to=form.vars.Correo,
+                subject=form.vars.Asunto,
+                message=form.vars.Mensaje):
+                response.flash = 'email sent sucessfully.'
+            else:
+                response.flash = 'fail to send email sorry!'
+        else:
+            response.flash = 'Unable to send the email : email parameters not defined'
+    elif form.errors:
+            response.flash='form has errors.'
+
+    response.flash='you clicked on civilized'
 
     return dict(form=form)
-    
+
 @auth.requires_login()
 def sb():
     return dict()
