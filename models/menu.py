@@ -8,4 +8,5 @@ response.menu = [
 (T('Solicitudes'),URL('default','requests')==URL(),URL('default','requests'),[]),
 (T('Catálogo'),URL('default','catalogue')==URL(),URL('default','catalogue'),[]),
 (T('Inventario'),URL('default','inventory')==URL(),URL('default','inventory'),[]),
+(T('Notificaciones'),URL('default','show_send_email')==URL(),URL('default','show_send_email'),[]),
 ]
