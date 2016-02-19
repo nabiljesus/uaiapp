@@ -2,7 +2,7 @@
 ### required - do no delete
 from gluon.tools import Mail
 mail = Mail()
-mail.settings.server = 'smtp.gmail.com:587'
+mail.settings.server = 'smtpgmail.com:587'
 mail.settings.sender = 'cybertechsolts@gmail.com'
 mail.settings.login = 'cybertechsolts@gmail.com:perreoperreo'
 
